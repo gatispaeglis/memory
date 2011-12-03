@@ -1,23 +1,38 @@
-import QtQuick 1.0
+import QtQuick 2.0
 
 Rectangle {
-    height: 100
-    border.width: 1
-    border.color: "black"
-    color: "yellow"
+    id: me
+    width: size
+    border.width: 1; border.color: "black"
+    color: "lightgreen"
     property int size: 0
     property int free: 0
+    property int oldFree: 0
     property alias addr: addrLabel.text
+    property int busyX: 0
 
-    onSizeChanged: {
-        free = size
+    ListModel { id: busyListParams } // busyListModel is a better name
+
+    onFreeChanged: {
+        if (oldFree != 0) {
+            busyListParams.append( { "size": oldFree - free, "adjustedX": busyX } ) // find how big was the request
+            busyX += oldFree - free
+            oldFree = free
+        }
+    }
+
+    Repeater {
+        id: busyPieceRepeater
+        model: busyListParams
+        BusyPiece {
+            x: adjustedX
+            width: size
+        }
     }
 
     Text {
         id: addrLabel
         anchors.horizontalCenter: parent.horizontalCenter
-        //x: parent.x + 5
-        //y: parent.y + 5
     }
     Text {
         id: sizeLabel
@@ -30,10 +45,16 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            size = size - 10;
-            console.log("size: " + size)
-            console.log("free: " + free)
+//            for ( var i = 0; i < busyListParams.count; i++ ) {
+//                console.log("x: " + busyListParams.get(i).x)
+//                console.log("size: " + busyListParams.get(i).size)
+//            }
         }
+    }
+
+    Component.onCompleted: {
+            free = size
+            oldFree = free
     }
 
 }
