@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtGraphicalEffects 0.1
+//import QtGraphicalEffects 0.1
 
 Rectangle {
     width: 100; height: 60

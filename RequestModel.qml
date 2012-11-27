@@ -37,9 +37,6 @@ ListModel {
         size: 43
     }
     ListElement {
-        size: 200
-    }
-    ListElement {
         size: 55
     }
     ListElement {

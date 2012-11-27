@@ -2,9 +2,6 @@ import QtQuick 2.0
 //import QtGraphicalEffects 0.1
 import "functions.js" as Memory
 
-// ### TODO - Jaasataisa labaaka pele
-// ### TODO - Zoom in&out [ right side ]
-
 Rectangle {
     id: mainWindow
     width: 1200; height: 1000
@@ -82,7 +79,7 @@ Rectangle {
 
                 RandomAccessMemory { id: firstFit; width: memorySize; freeChunkModel: chunks }
                 RandomAccessMemory { id: bestFit; width: memorySize; freeChunkModel: chunks }
-                //RandomAccessMemory { id: worstFit; width: memorySize; freeChunkModel: chunks }
+                RandomAccessMemory { id: worstFit; width: memorySize; freeChunkModel: chunks }
                 //RandomAccessMemory { id: nextFit; width: memorySize; freeChunkModel: chunks }
                 HumanRAM { id: human; width: memorySize; freeChunkModel: chunks }
             }
@@ -118,13 +115,6 @@ Rectangle {
                     model: LogMessageModel { id: logMessages }
                     delegate: LogRecord { id: logRecords /*line: "55"*/ }
 
-//                    Component.onCompleted: {
-//                        console.log("currentIndex: " + logView.currentItem.text)
-//                        console.log("FFF: " + logMessages.get(logView.count - 1).msg + " &&& ")
-//                    }
-//                    ListView.onAdd: {
-//                        console.log("currentIndex: " + logView.currentItem.text)
-//                    }
                     onCountChanged: {
                         currentIndex = count - 1
                     }

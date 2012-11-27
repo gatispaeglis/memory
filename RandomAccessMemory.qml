@@ -21,6 +21,4 @@ Rectangle {
             }
         }
     }
-
-    // implement method that prints current state of chunks
 }

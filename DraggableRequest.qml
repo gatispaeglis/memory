@@ -11,7 +11,7 @@ MouseArea {
     Rectangle {
         id: request
         color: "yellow"
-        width: 100; height: 100 // DO I NEED TO ADJUST THESE ? YES - when grabbed
+        width: 100; height: 100
         border { color: "black"; width: 3 }
         anchors {
             horizontalCenter: parent.horizontalCenter;
